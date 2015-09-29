@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# set your quality (%) levels here
+LOW=60
+MED=70
+HIGH=80
+
+# set maximum widths here
+SMALL=320
+MEDIUM=640
+LARGE=1000
+
+clear
+
+# don't edit these lines
+SRC="$1"
+SRCBASE="${1%%.*}"
+
+# NOTE: If you don't want .webp files, comment out those lines
+
+# Low-res
+echo "Generating low resolution..."
+convert "$SRC" -quality $LOW "$SRCBASE"_low.jpg
+convert "$SRC" -quality $LOW "$SRCBASE"_low.webp
+
+# Large
+echo "Generating large images..."
+convert "$SRC" -quality $HIGH -resize $LARGE "$SRCBASE"_1024.jpg
+convert "$SRC" -quality $HIGH -resize $LARGE "$SRCBASE"_1024.webp
+
+# Medium
+echo "Generating medium images..."
+convert "$SRC" -quality $MED -resize $MEDIUM "$SRCBASE"_640.jpg
+convert "$SRC" -quality $MED -resize $MEDIUM "$SRCBASE"_640.webp
+
+# Small
+echo "Generating small images..."
+convert "$SRC" -quality $LOW -resize $SMALL "$SRCBASE"_320.jpg
+convert "$SRC" -quality $LOW -resize $SMALL "$SRCBASE"_320.webp
+
+echo "Done."
+exit 0
