@@ -10,33 +10,39 @@ SMALL=320
 MEDIUM=640
 LARGE=1000
 
+# create webp images? Y or N
+CREATE_WEBP=y
+
+# don't edit below this line
 clear
 
-# don't edit these lines
 SRC="$1"
 SRCBASE="${1%%.*}"
-
-# NOTE: If you don't want .webp files, comment out those lines
 
 # Low-res
 echo "Generating low resolution..."
 convert "$SRC" -quality $LOW "$SRCBASE"_low.jpg
-convert "$SRC" -quality $LOW "$SRCBASE"_low.webp
 
 # Large
 echo "Generating large images..."
 convert "$SRC" -quality $HIGH -resize $LARGE "$SRCBASE"_$LARGE.jpg
-convert "$SRC" -quality $HIGH -resize $LARGE "$SRCBASE"_$LARGE.webp
 
 # Medium
 echo "Generating medium images..."
 convert "$SRC" -quality $MED -resize $MEDIUM "$SRCBASE"_$MEDIUM.jpg
-convert "$SRC" -quality $MED -resize $MEDIUM "$SRCBASE"_$MEDIUM.webp
 
 # Small
 echo "Generating small images..."
 convert "$SRC" -quality $LOW -resize $SMALL "$SRCBASE"_$SMALL.jpg
-convert "$SRC" -quality $LOW -resize $SMALL "$SRCBASE"_$SMALL.webp
+
+# Create WEBP Files
+if [ $CREATE_WEBP == "Y" ] || [ $CREATE_WEBP == "y" ]; then
+    echo "Generating webp images..."
+    convert "$SRC" -quality $LOW "$SRCBASE"_low.webp
+    convert "$SRC" -quality $HIGH -resize $LARGE "$SRCBASE"_$LARGE.webp
+    convert "$SRC" -quality $MED -resize $MEDIUM "$SRCBASE"_$MEDIUM.webp
+    convert "$SRC" -quality $LOW -resize $SMALL "$SRCBASE"_$SMALL.webp
+fi
 
 echo "Done."
 exit 0
