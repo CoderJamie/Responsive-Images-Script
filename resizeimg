@@ -25,18 +25,18 @@ convert "$SRC" -quality $LOW "$SRCBASE"_low.webp
 
 # Large
 echo "Generating large images..."
-convert "$SRC" -quality $HIGH -resize $LARGE "$SRCBASE"_1024.jpg
-convert "$SRC" -quality $HIGH -resize $LARGE "$SRCBASE"_1024.webp
+convert "$SRC" -quality $HIGH -resize $LARGE "$SRCBASE"_$LARGE.jpg
+convert "$SRC" -quality $HIGH -resize $LARGE "$SRCBASE"_$LARGE.webp
 
 # Medium
 echo "Generating medium images..."
-convert "$SRC" -quality $MED -resize $MEDIUM "$SRCBASE"_640.jpg
-convert "$SRC" -quality $MED -resize $MEDIUM "$SRCBASE"_640.webp
+convert "$SRC" -quality $MED -resize $MEDIUM "$SRCBASE"_$MEDIUM.jpg
+convert "$SRC" -quality $MED -resize $MEDIUM "$SRCBASE"_$MEDIUM.webp
 
 # Small
 echo "Generating small images..."
-convert "$SRC" -quality $LOW -resize $SMALL "$SRCBASE"_320.jpg
-convert "$SRC" -quality $LOW -resize $SMALL "$SRCBASE"_320.webp
+convert "$SRC" -quality $LOW -resize $SMALL "$SRCBASE"_$SMALL.jpg
+convert "$SRC" -quality $LOW -resize $SMALL "$SRCBASE"_$SMALL.webp
 
 echo "Done."
 exit 0
